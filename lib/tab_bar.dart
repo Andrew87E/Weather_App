@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import './tabs/tab_map.dart';
@@ -30,6 +31,19 @@ class _TabBarState extends State<AeNav> {
             pageDetails[2]['pageName'],
             pageDetails[3]['pageName'],
           ]),
+      bottomNavigationBar: CurvedNavigationBar(
+        index: _activePageIndex,
+        onTap: (index) {
+          _pageController.animateToPage(index,
+              duration: const Duration(microseconds: 400), curve: Curves.ease);
+        },
+        items: const [
+          Icon(Icons.home_outlined),
+          Icon(Icons.favorite_outline),
+          Icon(Icons.search_outlined),
+          Icon(Icons.verified_user),
+        ],
+      ),
     );
   }
 }
