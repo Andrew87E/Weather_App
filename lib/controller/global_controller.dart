@@ -47,7 +47,12 @@ class GlobalController extends GetxController {
         .then((value) {
       _lat.value = value.latitude;
       _long.value = value.longitude;
+      
+
+
+
       _isLoading.value = false;
+
     });
   }
 }
