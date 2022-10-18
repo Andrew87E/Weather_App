@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class Header extends StatefulWidget {
   const Header({super.key});
@@ -16,6 +17,7 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   String city = "";
   final GlobalController globalController = Get.put(GlobalController());
+  String now = DateFormat("yMMMMd").format(DateTime.now());
 
   @override
   void initState() {
@@ -37,13 +39,24 @@ class _HeaderState extends State<Header> {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+          margin: const EdgeInsets.only(left: 20, right: 20),
           alignment: Alignment.topLeft,
           child: Text(
             city,
             style: GoogleFonts.spaceGrotesk(
               fontSize: 30,
               fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+          alignment: Alignment.topLeft,
+          child: Text(
+            now,
+            style: GoogleFonts.rubik(
+              fontSize: 14,
+              color: Colors.grey,
             ),
           ),
         ),
