@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
-import '../widgets/tab_bar.dart';
 
-class SearchScreen extends StatelessWidget {
-  Color bgColor;
-  SearchScreen({
-    Key? key,
-    required this.bgColor,
-  }) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: bgColor,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

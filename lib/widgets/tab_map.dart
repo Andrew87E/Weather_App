@@ -6,8 +6,8 @@ import '../screens/search.dart';
 
 final List<Map<String, dynamic>> pageDetails = [
   {
-    'pageName': HomeScreen(
-      bgColor: Colors.white38,
+    'pageName': const HomeScreen(
+      title: 'Home',
     ),
     'title': 'Home',
     'navigationBarColor': Colors.lightGreen.shade500,
@@ -15,7 +15,7 @@ final List<Map<String, dynamic>> pageDetails = [
   },
   {
     'pageName': FavoritesScreen(
-      bgColor: Colors.white38,
+      title: 'Favorites',
     ),
     'title': 'Favorites',
     'navigationBarColor': Colors.orange.shade500,
@@ -23,7 +23,7 @@ final List<Map<String, dynamic>> pageDetails = [
   },
   {
     'pageName': SearchScreen(
-      bgColor: Colors.white38,
+      title: 'Favorites',
     ),
     'title': 'Home',
     'navigationBarColor': Colors.lightBlue.shade500,
