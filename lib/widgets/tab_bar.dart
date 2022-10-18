@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-import './tabs/tab_map.dart';
+import 'tab_map.dart';
 
 class AeNav extends StatefulWidget {
   const AeNav({super.key});

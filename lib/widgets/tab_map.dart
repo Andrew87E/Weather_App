@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'home_screen.dart';
-import 'favorites_screen.dart';
-import 'search.dart';
+import '../screens/home_screen.dart';
+import '../screens/favorites_screen.dart';
+import '../screens/search.dart';
 
 final List<Map<String, dynamic>> pageDetails = [
   {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../tab_bar.dart';
+import '../widgets/tab_bar.dart';
 
 class SearchScreen extends StatelessWidget {
   Color bgColor;
