@@ -1,37 +1,48 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:basic_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'tab_map.dart';
+import './tab_bar.dart';
 
 class AeNav extends StatefulWidget {
-  const AeNav({super.key});
+  const AeNav({
+    super.key,
+  });
 
   @override
-  State<AeNav> createState() => _TabBarState();
+  State<AeNav> createState() => _AeNavState();
 }
 
-class _TabBarState extends State<AeNav> {
-  final int _activePageIndex = 0;
-  final PageController _pageController = PageController(initialPage: 0);
-  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+class _AeNavState extends State<AeNav> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        index: _activePageIndex,
-        onTap: (index) {
-          _pageController.animateToPage(index,
-              duration: const Duration(microseconds: 400), curve: Curves.ease);
-        },
-        items: const <Widget>[
-          Icon(Icons.home_outlined),
-          Icon(Icons.favorite_outline),
-          Icon(Icons.search_outlined),
-          Icon(Icons.verified_user),
-        ],
-      ),
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite),
+          label: 'Favorites',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: 'Search',
+        ),
+      ],
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.amber[800],
+      onTap: _onItemTapped,
     );
   }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
 }

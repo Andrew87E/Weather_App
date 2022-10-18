@@ -1,4 +1,6 @@
 import 'package:basic_app/controller/global_controller.dart';
+import 'package:basic_app/widgets/header.dart';
+import 'package:basic_app/widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,17 +18,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'Home Screen',
-            ),
-          ],
+      bottomNavigationBar: const AeNav(),
+      body: SafeArea(
+        child: Obx(
+          () => globalController.checkLoading().isTrue
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              // ignore: avoid_unnecessary_containers
+              : ListView(
+                  scrollDirection: Axis.vertical,
+                  children: const [
+                    SizedBox(height: 20),
+                    Header(),
+                  ],
+                ),
         ),
       ),
     );
