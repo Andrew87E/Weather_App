@@ -6,7 +6,7 @@ import '../screens/search.dart';
 
 final List<Map<String, dynamic>> pageDetails = [
   {
-    'pageName': const HomeScreen(
+    'pageName': HomeScreen(
       title: 'Home',
     ),
     'title': 'Home',

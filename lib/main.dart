@@ -1,3 +1,5 @@
+import 'package:basic_app/screens/favorites_screen.dart';
+import 'package:basic_app/screens/search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'screens/home_screen.dart';
@@ -11,12 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      home: HomeScreen(
-        title: 'Home',
-      ),
+    return GetMaterialApp(
       title: "Weather App",
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomeScreen(title: 'Home'),
+        '/Favorites': (context) => const FavoritesScreen(title: 'Favorites'),
+        '/search': (context) => const SearchScreen(title: 'Search'),
+      },
     );
   }
 }
