@@ -1,50 +1,36 @@
-// instance for getting the api response
-class WeatherDataCurrent {
-  final Current current;
-  WeatherDataCurrent({required this.current});
+class WeatherDataHourly {
+  List<Hourly> hourly;
+  WeatherDataHourly({required this.hourly});
 
-  factory WeatherDataCurrent.fromJson(Map<String, dynamic> json) =>
-      WeatherDataCurrent(current: Current.fromJson(json['current']));
+  factory WeatherDataHourly.fromJson(Map<String, dynamic> json) =>
+      WeatherDataHourly(
+          hourly:
+              List<Hourly>.from(json['hourly'].map((e) => Hourly.fromJson(e))));
 }
 
-class Current {
+class Hourly {
+  int? dt;
   int? temp;
-  int? humidity;
-  int? clouds;
-  double? uvIndex;
-  double? feelsLike;
-  double? windSpeed;
+
   List<Weather>? weather;
 
-  Current({
+  Hourly({
+    this.dt,
     this.temp,
-    this.humidity,
-    this.feelsLike,
-    this.clouds,
-    this.uvIndex,
-    this.windSpeed,
     this.weather,
   });
 
-  factory Current.fromJson(Map<String, dynamic> json) => Current(
+  factory Hourly.fromJson(Map<String, dynamic> json) => Hourly(
+        dt: json['dt'] as int?,
         temp: (json['temp'] as num?)?.round(),
-        feelsLike: (json['feels_like'] as num?)?.toDouble(),
-        humidity: json['humidity'] as int?,
-        uvIndex: (json['uvi'] as num?)?.toDouble(),
-        clouds: json['clouds'] as int?,
-        windSpeed: (json['wind_speed'] as num?)?.toDouble(),
         weather: (json['weather'] as List<dynamic>?)
             ?.map((e) => Weather.fromJson(e as Map<String, dynamic>))
             .toList(),
       );
 
   Map<String, dynamic> toJson() => {
+        'dt': dt,
         'temp': temp,
-        'feels_like': feelsLike,
-        'uvi': uvIndex,
-        'humidity': humidity,
-        'clouds': clouds,
-        'wind_speed': windSpeed,
         'weather': weather?.map((e) => e.toJson()).toList(),
       };
 }

@@ -42,5 +42,4 @@ class _AeNavState extends State<AeNav> {
       _selectedIndex = index;
     });
   }
-
 }

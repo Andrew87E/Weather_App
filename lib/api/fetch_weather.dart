@@ -1,27 +1,24 @@
 import 'dart:convert';
-import 'package:basic_app/api/api_key.dart';
+
 import 'package:basic_app/model/weather_data.dart';
-import '../model/weather_data_current.dart';
 import 'package:http/http.dart' as http;
+import 'package:basic_app/model/weather_data_current.dart';
+import 'package:basic_app/model/weather_data_daily.dart';
+import 'package:basic_app/model/weather_data_hourly.dart';
+import 'package:basic_app/utils/api_url.dart';
 
-
-class FetchWeatherApi {
+class FetchWeatherAPI {
   WeatherData? weatherData;
 
-  Future<WeatherData> processData(lat, long) async {
-    var res = await http.get(Uri.parse(apiURL(lat, long)));
-    var jsonString = jsonDecode(res.body);
-    weatherData = WeatherData(WeatherDataCurrent.fromJson(jsonString));
+  // procecssing the data from response -> to json
+  Future<WeatherData> processData(lat, lon) async {
+    var response = await http.get(Uri.parse(apiURL(lat, lon)));
+    var jsonString = jsonDecode(response.body);
+    weatherData = WeatherData(
+        WeatherDataCurrent.fromJson(jsonString),
+        WeatherDataHourly.fromJson(jsonString),
+        WeatherDataDaily.fromJson(jsonString));
 
     return weatherData!;
   }
-}
-
-String apiURL(var lat, var long) {
-  String url;
-
-  url =
-      'https://api.openweathermap.org/data/3.0/onecall?lat=$lat&lon=-$long&units=imperial&appid=$apiKey&exclude=minutely';
-
-  return url;
 }
