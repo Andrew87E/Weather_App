@@ -1,3 +1,5 @@
+import 'package:basic_app/api/fetch_weather.dart';
+import 'package:basic_app/model/weather_data.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +12,12 @@ class GlobalController extends GetxController {
   RxDouble getLat() => _lat;
   RxDouble getLong() => _long;
 
+  final weatherData = WeatherData().obs;
+
+  WeatherData getWeatherData() {
+    return weatherData.value;
+  }
+
   @override
   void onInit() {
     if (_isLoading.isTrue) {
@@ -19,10 +27,10 @@ class GlobalController extends GetxController {
   }
 
   getLocation() async {
-    bool isServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    bool isServiceEnabled;
     LocationPermission locationPermission;
 
-    Geolocator.isLocationServiceEnabled();
+    isServiceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!isServiceEnabled) {
       return Future.error('Location services are disabled.');
@@ -45,14 +53,12 @@ class GlobalController extends GetxController {
     return await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high)
         .then((value) {
-      _lat.value = value.latitude;
-      _long.value = value.longitude;
-      
-
-
-
-      _isLoading.value = false;
-
+      return FetchWeatherApi()
+          .processData(value.latitude, value.longitude)
+          .then((val) {
+        weatherData.value = val;
+        _isLoading.value = false;
+      });
     });
   }
 }

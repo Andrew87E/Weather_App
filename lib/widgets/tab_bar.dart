@@ -1,6 +1,4 @@
-import 'package:basic_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import './tab_bar.dart';
 
 class AeNav extends StatefulWidget {
   const AeNav({

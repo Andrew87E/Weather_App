@@ -4,6 +4,8 @@ import 'package:basic_app/widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widgets/current_weather_widget.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -28,9 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
               // ignore: avoid_unnecessary_containers
               : ListView(
                   scrollDirection: Axis.vertical,
-                  children: const [
-                    SizedBox(height: 20),
-                    Header(),
+                  children: [
+                    const SizedBox(height: 20),
+                    const Header(),
+                    CurrentWeather(
+                      weatherDataCurrent:
+                          globalController.getWeatherData().getCurrentWeather(),
+                    ),
                   ],
                 ),
         ),
