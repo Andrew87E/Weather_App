@@ -10,14 +10,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/andrew87e/Weather_App">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
 <h3 align="center">Weather App</h3>
 
   <p align="center">
-    A simple weather app using the Open Weather API and Flutter.
+    A weather app using the Open Weather API and Flutter.
     <br />
     <a href="https://github.com/andrew87e/Weather_App"><strong>Explore the docs »</strong></a>
     <br />
@@ -40,13 +37,6 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
@@ -59,6 +49,8 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
+
+A weather app that uses your location and the Open Weather Api to get the current weather, 7 day forecast and more! 
 
 <img src="assets/img/top.png" alt="Screenshot" width="300" height="600">
 
