@@ -11,7 +11,7 @@ class HourlyDataWidget extends StatelessWidget {
       : super(key: key);
 
   // card index
-  RxInt cardIndex = GlobalController().getIndex();
+  final RxInt cardIndex = GlobalController().getIndex();
 
   @override
   Widget build(BuildContext context) {
@@ -74,15 +74,14 @@ class HourlyDataWidget extends StatelessWidget {
   }
 }
 
-// hourly details class
 class HourlyDetails extends StatelessWidget {
-  int temp;
-  int index;
-  int cardIndex;
-  int timeStamp;
-  String weatherIcon;
+  final int temp;
+  final int index;
+  final int cardIndex;
+  final int timeStamp;
+  final String weatherIcon;
 
-  HourlyDetails(
+  const HourlyDetails(
       {Key? key,
       required this.cardIndex,
       required this.index,
