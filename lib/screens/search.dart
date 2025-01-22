@@ -19,10 +19,10 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             Text(
               'Search Screen',
             ),

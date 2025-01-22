@@ -1,17 +1,13 @@
+// lib/services/weather_service.dart
 import 'dart:convert';
-import 'package:basic_app/model/weather_data_current.dart';
-import 'package:basic_app/model/weather_data_daily.dart';
-import 'package:basic_app/model/weather_data_hourly.dart';
 import 'package:http/http.dart' as http;
-import 'package:basic_app/model/weather_data.dart';
 import 'package:basic_app/services/auth_service.dart';
 
-class FetchWeatherAPI {
+class WeatherService {
   static const String baseUrl = 'https://weather-server-sandy.vercel.app';
   final AuthService _authService = AuthService();
-  WeatherData? weatherData;
 
-  Future<WeatherData> processData(lat, lon) async {
+  Future<Map<String, dynamic>> getWeatherData(double lat, double lon) async {
     try {
       final token = await _authService.getToken();
       if (token == null) throw Exception('Not authenticated');
@@ -25,13 +21,7 @@ class FetchWeatherAPI {
       );
 
       if (response.statusCode == 200) {
-        var jsonString = jsonDecode(response.body);
-        weatherData = WeatherData(
-          WeatherDataCurrent.fromJson(jsonString),
-          WeatherDataHourly.fromJson(jsonString),
-          WeatherDataDaily.fromJson(jsonString),
-        );
-        return weatherData!;
+        return json.decode(response.body);
       } else if (response.statusCode == 401) {
         throw Exception('Authentication expired');
       }

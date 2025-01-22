@@ -50,7 +50,7 @@
 
 ## About The Project
 
-A weather app that uses your location and the Open Weather Api to get the current weather, 7 day forecast and more! 
+A weather app that uses your location and the Open Weather Api to get the current weather, 7 day forecast and more!
 
 <img src="assets/img/top.png" alt="Screenshot" width="300" height="600">
 
@@ -129,3 +129,5 @@ Project Link: [https://github.com/andrew87e/Weather_App](https://github.com/andr
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/andrew-edwards-software-engineer
 [product-screenshot]: images/screenshot.png
+
+<!-- deployment uses Neondb for postgres serverless and upstash for redis. -->

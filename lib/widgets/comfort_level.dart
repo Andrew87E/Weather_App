@@ -28,7 +28,8 @@ class ComfortLevel extends StatelessWidget {
                 child: SleekCircularSlider(
                   min: 0,
                   max: 100,
-                  initialValue: weatherDataCurrent.current.humidity!.toDouble(),
+                  initialValue:
+                      weatherDataCurrent.current?.humidity?.toDouble() ?? 0.0,
                   appearance: CircularSliderAppearance(
                       customWidths: CustomSliderWidths(
                           handlerSize: 0, trackWidth: 12, progressBarWidth: 12),
@@ -61,7 +62,7 @@ class ComfortLevel extends StatelessWidget {
                               color: CustomColors.textColorBlack,
                               fontWeight: FontWeight.w400)),
                       TextSpan(
-                          text: "${weatherDataCurrent.current.feelsLike}",
+                          text: "${weatherDataCurrent.current?.feelsLike}",
                           style: const TextStyle(
                               fontSize: 14,
                               height: 0.8,
@@ -85,7 +86,7 @@ class ComfortLevel extends StatelessWidget {
                               color: CustomColors.textColorBlack,
                               fontWeight: FontWeight.w400)),
                       TextSpan(
-                          text: "${weatherDataCurrent.current.uvIndex}",
+                          text: "${weatherDataCurrent.current?.uvIndex}",
                           style: const TextStyle(
                               fontSize: 14,
                               height: 0.8,

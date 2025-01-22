@@ -1,8 +1,13 @@
-import 'package:basic_app/screens/home_screen.dart';
+// lib/screens/screens.dart
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:basic_app/screens/home_screen.dart';
+import 'package:basic_app/screens/settings_screen.dart';
+import 'package:basic_app/screens/auth_screen.dart';
+import 'package:basic_app/controller/global_controller.dart';
 
 class Screens extends StatefulWidget {
-  const Screens({Key? key}) : super(key: key);
+  const Screens({super.key});
 
   @override
   State<Screens> createState() => _ScreensState();
@@ -10,15 +15,18 @@ class Screens extends StatefulWidget {
 
 class _ScreensState extends State<Screens> {
   int _selectedIndex = 0;
+  final GlobalController globalController = Get.find<GlobalController>();
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    Text(
+
+  late final List<Widget> _widgetOptions = <Widget>[
+    const HomeScreen(),
+    const Text(
       'Index 1: Saved',
       style: optionStyle,
     ),
-    Text(
+    const Text(
       'Index 2: Search',
       style: optionStyle,
     ),
@@ -26,30 +34,54 @@ class _ScreensState extends State<Screens> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-        ],
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.cyan[400],
-        onTap: _onItemTapped,
-      ),
-    );
+    return Obx(() {
+      if (!globalController.isAuthenticated().value) {
+        return const AuthScreen();
+      }
+
+      return Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingsScreen()),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () => globalController.logout(),
+            ),
+          ],
+        ),
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+            ),
+          ],
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.cyan[400],
+          onTap: _onItemTapped,
+        ),
+      );
+    });
   }
 
   void _onItemTapped(int index) {

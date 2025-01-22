@@ -19,10 +19,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             Text(
               'Favorites Screen',
             ),

@@ -1,10 +1,28 @@
-import 'package:basic_app/api/api_key.dart';
+import 'package:basic_app/services/auth_service.dart';
 
-String apiURL(var lat, var lon) {
-  String url;
+Future<String> apiURL(var lat, var lon) async {
+  const baseUrl = 'https://weather-server-sandy.vercel.app';
 
-  url =
-      "https://api.openweathermap.org/data/3.0/onecall?lat=$lat&lon=$lon&units=imperial&appid=$apiKey&exclude=minutely";
+  final authService = AuthService();
+  final token = await authService.getToken();
 
-  return url;
+  if (token == null) {
+    throw Exception('Not authenticated');
+  }
+
+  return '$baseUrl/api/weather/$lat/$lon';
+}
+
+Future<Map<String, String>> getApiHeaders() async {
+  final authService = AuthService();
+  final token = await authService.getToken();
+
+  if (token == null) {
+    throw Exception('Not authenticated');
+  }
+
+  return {
+    'Authorization': 'Bearer $token',
+    'Content-Type': 'application/json',
+  };
 }

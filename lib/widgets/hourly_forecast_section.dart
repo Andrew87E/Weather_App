@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 class HourlyForecastSection extends StatelessWidget {
   final WeatherDataHourly weatherDataHourly;
 
-  const HourlyForecastSection({Key? key, required this.weatherDataHourly}) : super(key: key);
+  const HourlyForecastSection({Key? key, required this.weatherDataHourly})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,9 @@ class HourlyForecastSection extends StatelessWidget {
           ),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: weatherDataHourly.hourly.length > 24 ? 24 : weatherDataHourly.hourly.length,
+            itemCount: weatherDataHourly.hourly.length > 24
+                ? 24
+                : weatherDataHourly.hourly.length,
             itemBuilder: (context, index) {
               var hourly = weatherDataHourly.hourly[index];
               return Container(

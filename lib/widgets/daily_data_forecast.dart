@@ -61,7 +61,7 @@ class DailyDataForecast extends StatelessWidget {
                       SizedBox(
                         width: 80,
                         child: Text(
-                          getDay(weatherDataDaily.daily[index].dt),
+                          getDay(weatherDataDaily.daily[index].summary),
                           style: const TextStyle(
                               color: CustomColors.textColorBlack, fontSize: 13),
                         ),
@@ -70,10 +70,10 @@ class DailyDataForecast extends StatelessWidget {
                         height: 30,
                         width: 30,
                         child: Image.asset(
-                            "assets/weather/${weatherDataDaily.daily[index].weather![0].icon}.gif"),
+                            "assets/weather/${weatherDataDaily.daily[index].icon}.gif"),
                       ),
                       Text(
-                          "${weatherDataDaily.daily[index].temp!.max}°/${weatherDataDaily.daily[index].temp!.min}")
+                          "${weatherDataDaily.daily[index].tempMax}°/${weatherDataDaily.daily[index].tempMin}")
                     ],
                   )),
               Container(

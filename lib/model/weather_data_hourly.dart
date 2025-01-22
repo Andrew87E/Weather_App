@@ -2,59 +2,51 @@ class WeatherDataHourly {
   List<Hourly> hourly;
   WeatherDataHourly({required this.hourly});
 
-  factory WeatherDataHourly.fromJson(Map<String, dynamic> json) =>
-      WeatherDataHourly(
-          hourly:
-              List<Hourly>.from(json['hourly'].map((e) => Hourly.fromJson(e))));
+  factory WeatherDataHourly.fromJson(Map<String, dynamic> json) {
+    List<dynamic> hourlyData = json['hourly']['data'] ?? [];
+    return WeatherDataHourly(
+      hourly: hourlyData.map((e) => Hourly.fromJson(e)).toList(),
+    );
+  }
 }
 
 class Hourly {
-  int? dt;
-  int? temp;
-
-  List<Weather>? weather;
+  int? time;
+  double? temp;
+  String? icon;
+  double? precipitation;
+  String? summary;
+  double? windSpeed;
+  double? precipProbability;
+  int? windBearing;
+  double? humidity;
+  double? cloudCover;
 
   Hourly({
-    this.dt,
+    this.time,
     this.temp,
-    this.weather,
+    this.icon,
+    this.precipitation,
+    this.summary,
+    this.windSpeed,
+    this.precipProbability,
+    this.windBearing,
+    this.humidity,
+    this.cloudCover,
   });
 
-  factory Hourly.fromJson(Map<String, dynamic> json) => Hourly(
-        dt: json['dt'] as int?,
-        temp: (json['temp'] as num?)?.round(),
-        weather: (json['weather'] as List<dynamic>?)
-            ?.map((e) => Weather.fromJson(e as Map<String, dynamic>))
-            .toList(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        'dt': dt,
-        'temp': temp,
-        'weather': weather?.map((e) => e.toJson()).toList(),
-      };
-}
-
-class Weather {
-  int? id;
-  String? main;
-  String? description;
-  String? icon;
-
-  Weather({this.id, this.main, this.description, this.icon});
-
-  // from json
-  factory Weather.fromJson(Map<String, dynamic> json) => Weather(
-        id: json['id'] as int?,
-        main: json['main'] as String?,
-        description: json['description'] as String?,
-        icon: json['icon'] as String?,
-      );
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'main': main,
-        'description': description,
-        'icon': icon,
-      };
+  factory Hourly.fromJson(Map<String, dynamic> json) {
+    return Hourly(
+      time: json['time']?.toInt(),
+      temp: json['temperature']?.toDouble(),
+      icon: json['icon'],
+      precipitation: json['precipIntensity']?.toDouble(),
+      summary: json['summary'],
+      windSpeed: json['windSpeed']?.toDouble(),
+      precipProbability: json['precipProbability']?.toDouble(),
+      windBearing: json['windBearing']?.toInt(),
+      humidity: (json['humidity']?.toDouble() ?? 0) * 100,
+      cloudCover: (json['cloudCover']?.toDouble() ?? 0) * 100,
+    );
+  }
 }

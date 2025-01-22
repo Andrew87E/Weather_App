@@ -21,7 +21,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
 
   @override
   void initState() {
-    getAddress(globalController.getLattitude().value,
+    getAddress(globalController.getLatitude().value,
         globalController.getLongitude().value);
     super.initState();
   }

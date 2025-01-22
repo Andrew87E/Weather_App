@@ -9,7 +9,6 @@ class WeatherData {
 
   WeatherData([this.current, this.hourly, this.daily]);
 
-  // function to fetch these values
   WeatherDataCurrent getCurrentWeather() => current!;
   WeatherDataHourly getHourlyWeather() => hourly!;
   WeatherDataDaily getDailyWeather() => daily!;
